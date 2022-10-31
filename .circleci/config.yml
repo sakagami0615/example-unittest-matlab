@@ -1,11 +1,6 @@
 version: 2.1
 orbs:
   matlab: mathworks/matlab@0
-commands:
-  run-tests:
-    steps:
-      - run:
-          command: setup;
 jobs:
   build:
     machine:
@@ -13,6 +8,9 @@ jobs:
     steps:
       - checkout
       - matlab/install
+      - matlab/run-command:
+            command:  
+              "run setup.m"
       - matlab/run-tests:
           test-results-junit: test-results/matlab/results.xml
       - store_test_results:
