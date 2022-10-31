@@ -3,13 +3,14 @@ orbs:
   matlab: mathworks/matlab@0
 jobs:
   build:
+    working_directory: ~/SampleUnitTest-MATLAB
     machine:
       image: 'ubuntu-2204:2022.07.1'
     steps:
       - checkout
       - run:
           command: |
-            echo 'export PATH=/home/circleci/project/src:"$PATH"' >> "$MATLABPATH"
+            echo 'export PATH=~/SampleUnitTest-MATLAB/src:"$PATH"' >> "$MATLABPATH"
             source "$MATLABPATH"
       - matlab/install
       - matlab/run-tests:
