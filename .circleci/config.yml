@@ -1,4 +1,4 @@
-version: '2.1'
+version: 2.1
 orbs:
   matlab: mathworks/matlab@0
 jobs:
@@ -10,7 +10,7 @@ jobs:
       - matlab/install
       - matlab/run-command:
           command: |
-            setup
+            run setup.m
             cd test
       - matlab/run-tests:
           test-results-junit: test-results/matlab/results.xml
