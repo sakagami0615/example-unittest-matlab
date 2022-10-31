@@ -7,12 +7,9 @@ jobs:
       image: 'ubuntu-2204:2022.07.1'
     steps:
       - checkout
-      - run:
-          command: |
-            echo 'export PATH=./src:"$PATH"' >> "$MATLABPATH"
-            source "$MATLABPATH"
       - matlab/install
       - matlab/run-tests:
+          source-folder: src
           test-results-junit: test-results/matlab/results.xml
       - store_test_results:
           path: test-results
