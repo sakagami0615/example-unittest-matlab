@@ -7,6 +7,10 @@ jobs:
       image: 'ubuntu-2204:2022.07.1'
     steps:
       - checkout
+      - run:
+          command: |
+            echo 'export PATH=/home/circleci/project/src:"$PATH"' >> "$MATLABPATH"
+            source "$MATLABPATH"
       - matlab/install
       - matlab/run-tests:
           test-results-junit: test-results/matlab/results.xml
