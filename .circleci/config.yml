@@ -16,5 +16,5 @@ workflows:
   build:
     jobs:
       - build
-    environment:
-            MATLABPATH: /home/circleci/project/src
+  environment:
+    MATLABPATH: /home/circleci/project/src
