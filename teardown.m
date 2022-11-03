@@ -1,6 +1,6 @@
 % パスの追加
-rmpath(genpath('src'));
 rmpath(genpath('test'));
+rmpath(genpath('src'));
 
 % 環境の初期化
 clc;
