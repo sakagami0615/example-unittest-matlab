@@ -10,6 +10,7 @@ jobs:
       - matlab/install
       - matlab/run-tests:
           source-folder: src
+          source-folder: test/mock
           test-results-junit: test-results/matlab/results.xml
       - store_test_results:
           path: test-results
