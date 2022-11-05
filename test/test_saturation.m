@@ -5,7 +5,7 @@ classdef test_saturation < matlab.unittest.TestCase
         % saturation無しの動作確認
         function test_path_through(testCase)
             expected = saturation(10, 11, 9);
-            testCase.verifyEqual(expected, 11);
+            testCase.verifyEqual(expected, 10);
         end
         
         % 最大値saturationの動作確認

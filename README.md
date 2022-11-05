@@ -185,37 +185,43 @@ ans =
 > ```
 >
 
-
 ## CircleCIを用いたテスト自動化
 
 [MATLAB と Simulink による継続的インテグレーション](https://jp.mathworks.com/solutions/continuous-integration.html) のページによると、MATLABでは CircleCI / GitHub Actions / Azure DevOps / Travis CI などの継続的インテグレーションがサポートされています。
 今回は少し使い慣れているCircleCIを使用してテスト自動化の環境を構築してみます。
 
-TODO: CircleCIのconfigの説明を記載していく。
-
 ### **configファイルの作成**
+
+CircleCI Orbsで[matlab](https://circleci.com/developer/orbs/orb/mathworks/matlab#usage-run-tests-with-report)が提供されています。<br>それを用いて作成したユニットテストを実施するために`.circleci/config.yml`ファイルを作成します。<br>内容は下記の通りとなります。
 
 ```yaml
 version: 2.1
 orbs:
-  matlab: mathworks/matlab@0
+  matlab: mathworks/matlab@0	# matlabのOrbsを指定する
 jobs:
   build:
     machine:
       image: 'ubuntu-2204:2022.07.1'
     steps:
-      - checkout
-      - matlab/install
-      - matlab/run-tests:
-          source-folder: src
-          test-results-junit: test-results/matlab/results.xml
+      - checkout				# GitHubの資産をチェックアウト
+      - matlab/install			# MATLABの環境準備
+      - matlab/run-tests:		# runtests('test')が実施される。※以下の行はruntestsの設定
+          source-folder: src										# コードが格納されているフォルダを指定
+          test-results-junit: test-results/matlab/results.xml		# テストの結果をCircleCIのサイトで確認するための設定
       - store_test_results:
-          path: test-results
+          path: test-results										# テストの結果をCircleCIのサイトで確認するための設定
+# ワークフローの設定
+# ※GitHubのどのブランチにpushしたとかのイベントをトリガーにするか等の設定が可能
 workflows:
   build:
     jobs:
       - build
 ```
+
+
+詳細な説明はスキップする（あまり把握できていない、、、）が、CircleCIでGitHubリポジトリとPipelineをつないだ状態で、このconfig.ymlをGitHubにコミットすることで、CircleCI上でテストが実行されるのを確認しました。
+
+
 
 ## **参考資料**
 
