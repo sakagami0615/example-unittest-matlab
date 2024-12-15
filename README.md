@@ -1,7 +1,5 @@
 # **SampleUnitTest-MATLAB**
 
-
-
 ## **環境**
 
 + Windows 10
@@ -15,13 +13,12 @@
 + `setup.m`: パス設定用のスクリプト。
 + `teardown.m`: パス設定の削除用のスクリプト。
 
-<br>
-
 ## **ユニットテスト作成手順**
 
 ### **ユニットテスト用のクラススクリプトの作成**
 
-まず、ユニットテスト用のクラスを作成します。<br>テスト対象のスクリプトに対して1つのテストクラスを用意する構成にしています。
+まず、ユニットテスト用のクラスを作成します。  
+テスト対象のスクリプトに対して1つのテストクラスを用意する構成にしています。
 
 ```matlab
 classdef <ClassName> < matlab.unittest.TestCase
@@ -36,10 +33,10 @@ classdef <ClassName> < matlab.unittest.TestCase
         ...
 ```
 
-メンバ関数内では、対象のロジック(関数やクラス)の出力が想定した出力になっているかを検証する処理を実装することになります。<br>
+メンバ関数内では、対象のロジック(関数やクラス)の出力が想定した出力になっているかを検証する処理を実装することになります。  
 検証には、[matlab.unittest.qualifications.Verifiable クラス](https://jp.mathworks.com/help/matlab/ref/matlab.unittest.qualifications.verifiable-class.html) を使用することになります。
 
-> 例) <br>
+> 例)  
 > 出力の一致確認とかであれば下記のようになります。
 > ```matlab
 > classdef <ClassName> < matlab.unittest.TestCase
@@ -52,28 +49,27 @@ classdef <ClassName> < matlab.unittest.TestCase
 >         end
 > ```
 
-ユニットテスト用のスクリプトは、メインのロジックと分けておくためにも `test` フォルダを作成して格納しておくのが良いと思います。<br>
+ユニットテスト用のスクリプトは、メインのロジックと分けておくためにも `test` フォルダを作成して格納しておくのが良いと思います。  
 ※本リポジトリでは、 `test/unit` フォルダで管理するようにしています。
-
-
 
 ## **ユニットテストを実行する**
 
-テスト一括実行のAPIとして[runtests](https://jp.mathworks.com/help/matlab/ref/runtests.html)が用意されています。<br>テストスクリプト格納フォルダを指定して実行するとができます。<br>今回の環境だと下記のコマンドでテストを実行できます。
+テスト一括実行のAPIとして[runtests](https://jp.mathworks.com/help/matlab/ref/runtests.html)が用意されています。  
+テストスクリプト格納フォルダを指定して実行するとができます。  
+今回の環境だと下記のコマンドでテストを実行できます。
 
 ```matlab
 runtests('test')
 ```
 
-
-
 ## **ユニットテストの結果を確認する**
-
 
 runtestsを実行するとコマンドライン上に結果が表示されます。
 
 ### **テストが全てパスした場合**
-テストを実施すると下記のような結果が表示されます。<br>今回用意した `test_saturation.m`には5つのユニットテストがあり、5個すべてのテストがパスしていることが確認できます。
+
+テストを実施すると下記のような結果が表示されます。  
+今回用意した `test_saturation.m`には5つのユニットテストがあり、5個すべてのテストがパスしていることが確認できます。
 
 ```matlab
 test_saturation を実行しています
@@ -100,7 +96,9 @@ ans =
 
 ### **テスト内に問題がある場合**
 
-テストを実施すると下記のような結果が表示されます。<br>今回用意した `test_saturation.m`には5つのユニットテストがあり、その中の`test_path_through`が失敗していることが確認できます。<br>また、失敗テーブルには、どのような値によって失敗しているかを確認することができます。
+テストを実施すると下記のような結果が表示されます。  
+今回用意した `test_saturation.m`には5つのユニットテストがあり、その中の`test_path_through`が失敗していることが確認できます。  
+また、失敗テーブルには、どのような値によって失敗しているかを確認することができます。
 
 ```matlab
 test_saturation を実行しています
@@ -115,9 +113,9 @@ test_saturation/test_path_through で検証に失敗しました。
     --> 失敗テーブル:
             Actual    Expected    Error       RelativeError   
             ______    ________    _____    ___________________
-        
+
               10         11        -1      -0.0909090909090909
-    
+
     実際の値:
         10
     必要な値:
@@ -153,9 +151,9 @@ ans =
    0.10706 秒間のテスト時間。
 ```
 
-<br>
-
-> [補足] <br>コマンドラインの表示以外にもテスト結果を確認する方法があります。<br>テスト実施時のコマンドを下記のようにすることでテスト結果をワークスペースに保存することができます。<br>
+> [補足]  
+> コマンドラインの表示以外にもテスト結果を確認する方法があります。  
+> テスト実施時のコマンドを下記のようにすることでテスト結果をワークスペースに保存することができます。
 >
 > ```matlab
 > result = runtests('test')
@@ -171,12 +169,12 @@ ans =
 >
 > ```matlab
 > ans =
-> 
+>
 >   5×6 table
-> 
+>
 >                          Name                         Passed    Failed    Incomplete    Duration       Details   
 >     ______________________________________________    ______    ______    __________    _________    ____________
-> 
+>
 >     {'test_saturation/test_path_through'         }    false     true        false         0.09328    {1×1 struct}
 >     {'test_saturation/test_max_saturation'       }    true      false       false       0.0022358    {1×1 struct}
 >     {'test_saturation/test_min_saturation'       }    true      false       false        0.001742    {1×1 struct}
@@ -192,7 +190,9 @@ ans =
 
 ### **configファイルの作成**
 
-CircleCI Orbsで[matlab](https://circleci.com/developer/orbs/orb/mathworks/matlab#usage-run-tests-with-report)が提供されています。<br>それを用いて作成したユニットテストを実施するために`.circleci/config.yml`ファイルを作成します。<br>内容は下記の通りとなります。
+CircleCI Orbsで[matlab](https://circleci.com/developer/orbs/orb/mathworks/matlab#usage-run-tests-with-report)が提供されています。  
+それを用いて作成したユニットテストを実施するために`.circleci/config.yml`ファイルを作成します。  
+内容は下記の通りとなります。
 
 ```yaml
 version: 2.1
@@ -218,14 +218,12 @@ workflows:
       - build
 ```
 
-
 詳細な説明はスキップする（あまり把握できていない、、、）が、CircleCIでGitHubリポジトリとPipelineをつないだ状態で、このconfig.ymlをGitHubにコミットすることで、CircleCI上でテストが実行されるのを確認しました。
-
-
 
 ## **参考資料**
 
-+ [MATLAB でのクラスベースのユニット テストの作成](https://jp.mathworks.com/help/matlab/matlab_prog/author-class-based-unit-tests-in-matlab.html)
-+ [テスト ケースの結果の解析](https://jp.mathworks.com/help/matlab/matlab_prog/analyze-testsolver-results.html)
-+ [matlab.unittest.qualifications.Verifiable クラス](https://jp.mathworks.com/help/matlab/ref/matlab.unittest.qualifications.verifiable-class.html)
-+ [matlab.unittest.TestResult クラス](https://jp.mathworks.com/help/matlab/ref/matlab.unittest.testresult-class.html)
+- [MATLAB でのクラスベースのユニット テストの作成](https://jp.mathworks.com/help/matlab/matlab_prog/author-class-based-unit-tests-in-matlab.html)
+- [テスト ケースの結果の解析](https://jp.mathworks.com/help/matlab/matlab_prog/analyze-testsolver-results.html)
+- [matlab.unittest.qualifications.Verifiable クラス](https://jp.mathworks.com/help/matlab/ref/matlab.unittest.qualifications.verifiable-class.html)
+- [matlab.unittest.TestResult クラス](https://jp.mathworks.com/help/matlab/ref/matlab.unittest.testresult-class.html)
+- [MATLAB Actions](https://github.com/matlab-actions)
